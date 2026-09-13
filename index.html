@@ -646,8 +646,8 @@ function viewDashboard(){
   </div>
 
   <div class="stat-grid">
-    <div class="stat green tappable" onclick="openGuestListSheet('arrived')"><span class="corner">🎉</span><div class="num">${arrived.length}</div><div class="lbl">已報到組數 ›</div></div>
-    <div class="stat tappable" onclick="openGuestListSheet('pending')"><span class="corner">⏳</span><div class="num">${gs.length-arrived.length}</div><div class="lbl">尚未報到 ›</div></div>
+    <div class="stat green tappable" onclick="openGuestListSheet('arrived')"><span class="corner">🎉</span><div class="num">${arrivedHeads}</div><div class="lbl">已報到人數 ›</div></div>
+    <div class="stat tappable" onclick="openGuestListSheet('pending')"><span class="corner">⏳</span><div class="num">${totalHeads-arrivedHeads}</div><div class="lbl">尚未報到人數 ›</div></div>
     <div class="stat gold tappable" onclick="openGuestListSheet('cookie')"><span class="corner">🍪</span><div class="num">${cookieGiven}<span style="font-size:20px;color:var(--muted)">/${cookieNeed}</span></div><div class="lbl">喜餅已發 / 需發 ›</div></div>
     <div class="stat"><span class="corner">🪑</span><div class="num">${tbls.length}</div><div class="lbl">總桌數</div></div>
   </div>
@@ -676,10 +676,11 @@ function viewDashboard(){
   <div class="tbl-grid">
     ${tbls.map(t=>{
       const at=guestsAtTable(t.id);
-      const ar=at.filter(g=>g.arrived).length;
-      const p=at.length?Math.round(ar/at.length*100):0;
+      const atHeads=at.reduce((s,g)=>s+(g.partySize||1),0);
+      const arHeads=at.filter(g=>g.arrived).reduce((s,g)=>s+(g.partySize||1),0);
+      const p=atHeads?Math.round(arHeads/atHeads*100):0;
       return `<div class="tbl-mini"><div class="tn">${esc(t.name)}</div>
-        <div class="frac">${ar}<small>/${at.length}</small></div>
+        <div class="frac">${arHeads}<small>/${atHeads} 人</small></div>
         <div class="mbar"><span style="width:${p}%"></span></div></div>`;
     }).join("")}
   </div>`:""}
@@ -718,7 +719,7 @@ function openGuestListSheet(type){
     </div>`;
   }).join(""):`<div class="empty"><div class="e-ic">🕊️</div><div style="font-size:15px">${empty}</div></div>`;
   openSheet(`<div class="sheet-head"><div class="nm">${title}</div>
-    <div class="meta"><span>${gs.length} 帖 · 共 ${heads} 人</span>${type==="arrived"?"<span>最新報到在最上面</span>":""}</div></div>
+    <div class="meta"><span>共 ${heads} 人 · ${gs.length} 組</span>${type==="arrived"?"<span>最新報到在最上面</span>":""}</div></div>
     ${rows}
     <button class="btn btn-ghost" style="margin-top:14px" onclick="closeSheet()">關閉</button>`);
 }
@@ -1574,8 +1575,8 @@ function viewSettings(){
     <h3 style="font-size:15px;margin-bottom:6px">資料備份</h3>
     <div style="font-size:13px;color:var(--muted);margin-bottom:12px">建議活動前先備份;本機模式換裝置時可用匯出/匯入搬移資料。</div>
     <div class="btn-row" style="margin-top:0">
-      <button class="btn btn-ghost btn-sm" style="flex:1" onclick="exportJSON()">⬇ 匯出備份</button>
-      <button class="btn btn-ghost btn-sm" style="flex:1" onclick="$('#importFile').click()">⬆ 匯入備份</button>
+      <button class="btn btn-ghost btn-sm" style="flex:1" onclick="requireAdmin('匯出備份', exportJSON)">🔒 匯出備份</button>
+      <button class="btn btn-ghost btn-sm" style="flex:1" onclick="requireAdmin('匯入備份', ()=>document.getElementById('importFile').click())">🔒 匯入備份</button>
     </div>
     <input type="file" id="importFile" accept=".json" class="hidden" onchange="importJSON(event)">
     <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:10px;color:var(--red)" onclick="clearAll()">🗑 清除所有資料</button>
@@ -1632,6 +1633,22 @@ function clearAll(){
     <div class="btn-row"><button class="btn btn-ghost" onclick="closeSheet()">取消</button>
       <button class="btn btn-primary" style="background:var(--red);box-shadow:none" onclick="doClearAll()">確認清除</button></div>`);
   setTimeout(()=>{ const i=$("#clrPw"); if(i)i.focus(); },150);
+}
+let _admCb=null;
+function requireAdmin(title, onOk){
+  _admCb=onOk;
+  openSheet(`<div class="sheet-head"><div class="nm">🔒 ${title}</div>
+    <div class="meta"><span>需要管理密碼(僅限新人)</span></div></div>
+    <div class="field-lbl" style="margin-top:0">管理密碼</div>
+    <input class="inp" id="admPw" type="password" inputmode="numeric" placeholder="請輸入管理密碼" style="text-align:center;letter-spacing:4px;font-size:20px" onkeydown="if(event.key==='Enter')submitAdmin()">
+    <div class="btn-row"><button class="btn btn-ghost" onclick="closeSheet()">取消</button>
+      <button class="btn btn-primary" onclick="submitAdmin()">確認</button></div>`);
+  setTimeout(()=>{ const i=$("#admPw"); if(i)i.focus(); },150);
+}
+function submitAdmin(){
+  const v=($("#admPw")||{}).value||"";
+  if(v!==ADMIN_PASSWORD){ toast("管理密碼錯誤"); const i=$("#admPw"); if(i){ i.value=""; i.focus(); } return; }
+  const cb=_admCb; _admCb=null; closeSheet(); if(cb) cb();
 }
 function doClearAll(){
   const v=($("#clrPw")||{}).value||"";
