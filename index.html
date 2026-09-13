@@ -165,9 +165,9 @@ main{max-width:760px;margin:0 auto;padding:16px 14px 24px}
 
 /* ---------- check-in ---------- */
 .searchbar{position:relative;margin-bottom:12px}
-.searchbar input{width:100%;padding:13px 14px 13px 42px;border:1px solid var(--line);border-radius:var(--r);background:var(--paper);font-size:16px;outline:none;transition:.18s}
+.searchbar input{width:100%;padding:18px 16px 18px 50px;border:1.5px solid var(--line);border-radius:var(--r);background:var(--paper);font-size:19px;outline:none;transition:.18s}
 .searchbar input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(194,160,92,.15)}
-.searchbar .si{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;opacity:.5}
+.searchbar .si{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:22px;opacity:.5}
 .filter-row{display:flex;gap:7px;margin-bottom:13px;overflow-x:auto;padding-bottom:2px}
 .chip{padding:7px 14px;border-radius:20px;border:1px solid var(--line);background:var(--paper);font-size:14px;color:var(--muted);white-space:nowrap;transition:.16s}
 .chip.on{background:var(--wine);color:#fff;border-color:var(--wine)}
@@ -181,12 +181,14 @@ main{max-width:760px;margin:0 auto;padding:16px 14px 24px}
 .g-tbl .t-num{font-family:"Cormorant Garamond",serif;font-size:20px;font-weight:600;color:var(--wine)}
 .g-tbl .t-lbl{font-size:12px;color:var(--muted)}
 .g-info{flex:1;min-width:0}
-.g-name{font-weight:500;font-size:16px;display:flex;align-items:center;gap:7px}
+.g-name{font-weight:700;font-size:21px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;line-height:1.25}
 .g-tags{display:flex;gap:6px;margin-top:4px;flex-wrap:wrap}
 .tag{font-size:12px;padding:2px 8px;border-radius:20px;background:var(--ivory);color:var(--muted)}
 .tag.cookie{background:#FCEFE0;color:#B07A2E}
 .tag.side{background:#F0E9F2;color:#7A5A82}
 .g-right{text-align:right;flex-shrink:0}
+.g-edit{flex-shrink:0;width:40px;height:40px;border-radius:11px;background:var(--ivory);border:1px solid var(--line);color:var(--muted);font-size:16px;display:flex;align-items:center;justify-content:center}
+.g-edit:active{background:var(--line)}
 .g-status{font-size:13px;color:var(--muted)}
 .g-status.ok{color:var(--green);font-weight:500}
 .g-gift{font-family:"Cormorant Garamond",serif;font-weight:600;color:var(--gold);font-size:17px}
@@ -851,8 +853,9 @@ function renderCiList(){
     return `<div class="g-card ${g.arrived?'done':''}" onclick="openCheckin('${g.id}')">
       <div class="g-tbl"><div class="t-num">${tn?esc(tn.replace(/[^0-9]/g,'')||tn.slice(0,2)):"—"}</div><div class="t-lbl">${tn?"":"未排桌"}</div></div>
       <div class="g-info">
-        <div class="g-name">${esc(g.name)}${g.partySize>1?`<span class="tag" style="background:#F0E9F2;color:#7A5A82">👪 ${g.partySize}位</span>`:""}</div>
-        <div class="g-tags">
+        <div class="g-name">
+          <span class="g-nm">${esc(g.name)}</span>
+          ${g.partySize>1?`<span class="tag" style="background:#F0E9F2;color:#7A5A82">👪 ${g.partySize}位</span>`:""}
           ${g.side?`<span class="tag side">${esc(g.side)}</span>`:""}
           ${g.relation?`<span class="tag">${esc(g.relation)}</span>`:""}
           ${cn.length?`<span class="tag">含 ${esc(cn.slice(0,3).join("、"))}${cn.length>3?"…":""}</span>`:""}
@@ -864,6 +867,7 @@ function renderCiList(){
           ? `<div class="g-gift">${g.giftAmount?fmtMoney(g.giftAmount):"已到"}</div><div class="g-status ok">✓ ${timeStr(g.arrivedTime)}</div>`
           : `<div class="g-status">輕觸報到</div>`}
       </div>
+      <button class="g-edit" onclick="event.stopPropagation();openGuestEdit('${g.id}')" title="編輯資料">✎</button>
     </div>`;
   }).join("");
 }
