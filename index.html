@@ -978,7 +978,9 @@ function openCheckin(id){
       const detail=`禮金 ${fmtMoney(amt)}${gg.needsCookie?(cg?" · 喜餅已交付":" · 喜餅未交付"):""}`;
       pushLog(s, first?"報到":"修改報到", first?"in":"ed", gg.name, detail);
     });
-    closeSheet(); toast(`✓ ${App.state.guests[gid].name} 報到完成`);
+    const _nm=App.state.guests[gid]?App.state.guests[gid].name:"";
+    ciSearch=""; closeSheet(); toast(`✓ ${_nm} 報到完成`);
+    if(currentView==="checkin"){ const si=$("#ciSearchInput"); if(si){ si.value=""; si.focus(); } }
   };
   window.undoCheckin=(gid)=>{
     if(!App.operator){ toast("請先在右上角選擇操作人員"); showIdentify(); return; }
