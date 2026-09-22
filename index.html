@@ -206,6 +206,18 @@ main{max-width:760px;margin:0 auto;padding:16px 14px 24px}
 .sheet-top{position:sticky;top:0;z-index:8;background:var(--paper);border-radius:22px 22px 0 0;padding-bottom:4px}
 .sheet-close{position:absolute;top:9px;right:13px;width:34px;height:34px;border-radius:50%;background:var(--ivory);border:1px solid var(--line);font-size:16px;color:var(--muted);display:flex;align-items:center;justify-content:center;z-index:9}
 .sheet-close:active{background:var(--line)}
+.ci-success{position:fixed;inset:0;z-index:400;background:rgba(42,22,32,.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:24px;animation:ovf .2s}
+.cis-card{background:#fff;border-radius:24px;padding:32px 28px 26px;text-align:center;max-width:340px;width:100%;box-shadow:0 24px 70px rgba(0,0,0,.35);animation:cisPop .35s cubic-bezier(.2,.9,.3,1)}
+@keyframes cisPop{from{transform:scale(.85);opacity:0}to{transform:none;opacity:1}}
+.cis-check{width:70px;height:70px;border-radius:50%;background:var(--green);color:#fff;font-size:40px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.cis-title{font-family:"Noto Serif TC",serif;font-size:24px;font-weight:600;color:var(--green)}
+.cis-name{font-size:18px;color:var(--ink);margin-top:6px}
+.cis-table{margin-top:18px;display:flex;align-items:baseline;justify-content:center;gap:8px;background:var(--ivory);border:1px solid var(--line);border-radius:18px;padding:16px 14px}
+.cis-tlabel{font-size:16px;color:var(--muted)}
+.cis-tnum{font-family:"Cormorant Garamond",serif;font-size:66px;font-weight:600;color:var(--wine);line-height:.9}
+.cis-tunit{font-size:22px;color:var(--muted)}
+.cis-notable{margin-top:18px;font-size:20px;color:var(--muted);background:var(--ivory);border-radius:16px;padding:16px}
+.cis-hint{font-size:13px;color:var(--muted);margin-top:16px}
 .sheet-pad{padding:8px 20px 22px}
 .sheet-head{text-align:center;padding:8px 0 16px;border-bottom:1px solid var(--line);margin-bottom:16px}
 .sheet-head .nm{font-family:"Noto Serif TC",serif;font-size:24px;font-weight:600}
@@ -842,7 +854,9 @@ function doWalkin(mode){
     const label=mode==="arrive"?"現場新增·報到":mode==="prepaid"?"現場新增·預收":mode==="giftonly"?"現場新增·未到收禮":"現場新增·加入名單";
     pushLog(s,label,mode==="pending"?"ed":"in",name,amt?`禮金 ${fmtMoney(amt)}`:ps+"人");
   });
-  ciSearch=""; closeSheet(); toast(`已新增 ${name}`);
+  ciSearch=""; closeSheet();
+  if(mode==="arrive"){ showCheckinSuccess(name, table?tableName(table):null); }
+  else { toast(`已新增 ${name}`); }
   if(currentView==="checkin"){ const si=$("#ciSearchInput"); if(si){ si.value=""; si.focus(); } }
 }
 function viewCheckin(){
@@ -927,6 +941,20 @@ function refreshGiftBtns(){
   const v=Number(($("#giftIn")||{}).value)||0;
   document.querySelectorAll(".qa").forEach(b=>b.classList.toggle("sel", v>0 && Number(b.dataset.amt)===v));
 }
+function showCheckinSuccess(name, tblName){
+  const tnum = tblName ? ((String(tblName).match(/\d+/)||[""])[0]) : "";
+  const el=document.createElement("div"); el.className="ci-success";
+  el.innerHTML=`<div class="cis-card">
+    <div class="cis-check">✓</div>
+    <div class="cis-title">報到成功</div>
+    <div class="cis-name">${esc(name)}</div>
+    ${tblName?`<div class="cis-table"><span class="cis-tlabel">請入座</span><span class="cis-tnum">${tnum||esc(tblName)}</span><span class="cis-tunit">桌</span></div>`:`<div class="cis-notable">尚未排桌</div>`}
+    <div class="cis-hint">輕觸關閉</div>
+  </div>`;
+  el.onclick=()=>{ if(el.parentNode) el.remove(); };
+  document.body.appendChild(el);
+  setTimeout(()=>{ if(el.parentNode) el.remove(); }, 3000);
+}
 function openCheckin(id){
   const g=App.state.guests[id]; if(!g)return;
   let gift=g.giftAmount||"";
@@ -976,11 +1004,6 @@ function openCheckin(id){
       <button onclick="setGift(0)" style="color:var(--muted)">清除</button>
     </div>
 
-    ${!g.arrived&&!g.prepaid?`<div class="cookie-banner ${g.giftOnly?'need':'no'}" id="nsRow" style="margin-top:4px">
-      <span class="cb-ic">🚫</span>
-      <div class="cb-t"><b>不克出席 · 僅收禮金</b><span>不算到場人數,禮金仍計入總額</span></div>
-      <div class="toggle ${g.giftOnly?'on':''}" id="nsTog"></div>
-    </div>`:""}
     ${g.prepaid&&!g.arrived?`<div class="cookie-banner" style="background:#EAF3F0;border-color:#BEDDD1;color:#2F6B54;margin-top:4px">
       <span class="cb-ic">💰</span>
       <div class="cb-t"><b>禮金已預收 ${fmtMoney(g.giftAmount)}</b><span>本人會到,現場點「完成報到」即可</span></div>
@@ -996,10 +1019,15 @@ function openCheckin(id){
           : g.prepaid
             ? `<button class="btn btn-ghost" onclick="undoPrepay('${id}')" style="color:var(--red)">清除預收</button>
                <button class="btn btn-primary" id="ciConfirmBtn" onclick="confirmCheckin('${id}')">✓ 完成報到</button>`
-            : `<button class="btn btn-green" onclick="doPrepay('${id}')">💰 先收禮金·會到</button>
+            : `<button class="btn btn-green" onclick="doPrepay('${id}')">💰 預收禮金</button>
                <button class="btn btn-primary" id="ciConfirmBtn" onclick="confirmCheckin('${id}')">✓ 完成報到</button>`}
     </div>
     ${!g.arrived&&!g.giftOnly&&!g.prepaid?`<button class="btn btn-ghost" style="width:100%;margin-top:10px" onclick="closeSheet()">取消</button>`:""}
+    ${!g.arrived&&!g.prepaid?`<div class="cookie-banner ${g.giftOnly?'need':'no'}" id="nsRow" style="margin-top:16px">
+      <span class="cb-ic">🚫</span>
+      <div class="cb-t"><b>不克出席 · 僅收禮金</b><span>不算到場人數,禮金仍計入總額</span></div>
+      <div class="toggle ${g.giftOnly?'on':''}" id="nsTog"></div>
+    </div>`:""}
   `);
 
   // 狀態:喜餅鎖 + 不克出席(僅收禮金)
@@ -1011,7 +1039,7 @@ function openCheckin(id){
     const locked = g.needsCookie && !cookieGiven && !noShow;
     confirmBtn.disabled = locked;
     confirmBtn.classList.toggle("locked", locked);
-    confirmBtn.textContent = locked ? "🔒 請先交付喜餅" : (noShow ? "登錄禮金(未到)" : baseLabel);
+    confirmBtn.textContent = locked ? "🔒 開喜餅開關後可報到" : (noShow ? "登錄禮金(未到)" : baseLabel);
   }
   const tog=$("#ckTog");
   if(tog){ tog.onclick=()=>{ cookieGiven=!cookieGiven; tog.classList.toggle("on",cookieGiven);
@@ -1028,6 +1056,7 @@ function openCheckin(id){
     if(!App.operator){ toast("請先在右上角選擇操作人員"); showIdentify(); return; }
     const ns=$("#nsTog")&&$("#nsTog").classList.contains("on");
     const gLock=App.state.guests[gid];
+    const wasArrived=!!(gLock&&gLock.arrived);
     if(!ns && gLock && gLock.needsCookie){ const on=$("#ckTog")&&$("#ckTog").classList.contains("on"); if(!on){ toast("請先滑開喜餅開關(標記已交付)才能完成報到"); return; } }
     const amt=Number($("#giftIn").value)||0;
     const cg=$("#ckTog")?$("#ckTog").classList.contains("on"):!!App.state.guests[gid].cookieGiven;
@@ -1047,8 +1076,13 @@ function openCheckin(id){
         pushLog(s, first?"報到":"修改報到", first?"in":"ed", gg.name, detail);
       }
     });
-    const _nm=App.state.guests[gid]?App.state.guests[gid].name:"";
-    ciSearch=""; closeSheet(); toast(ns?`已登錄 ${_nm} 未到禮金`:`✓ ${_nm} 報到完成`);
+    const gg2=App.state.guests[gid];
+    const _nm=gg2?gg2.name:"";
+    const _tn=gg2&&gg2.table?tableName(gg2.table):null;
+    ciSearch=""; closeSheet();
+    if(ns){ toast(`已登錄 ${_nm} 未到禮金`); }
+    else if(!wasArrived){ showCheckinSuccess(_nm,_tn); }
+    else { toast(`已更新 ${_nm}`); }
     if(currentView==="checkin"){ const si=$("#ciSearchInput"); if(si){ si.value=""; si.focus(); } }
   };
   window.undoCheckin=(gid)=>{
