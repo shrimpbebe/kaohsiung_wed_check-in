@@ -177,6 +177,10 @@ main{max-width:760px;margin:0 auto;padding:16px 14px 24px}
 .g-card:active{transform:scale(.99)}
 .g-card.done{background:#FAFCFB;border-color:var(--green-soft)}
 .g-card.done::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--green)}
+.g-card.giftonly{background:#FFFCF6;border-color:#EBD9B8}
+.g-card.giftonly::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold)}
+.g-card.prepaid{background:#F5FAF8;border-color:#CDE5DB}
+.g-card.prepaid::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:#4F8A6B}
 .g-tbl{width:46px;height:46px;border-radius:12px;background:var(--ivory);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;line-height:1.1}
 .g-tbl .t-num{font-family:"Cormorant Garamond",serif;font-size:20px;font-weight:600;color:var(--wine)}
 .g-tbl .t-lbl{font-size:12px;color:var(--muted)}
@@ -331,95 +335,6 @@ select.inp:focus,input.inp:focus,textarea.inp:focus{border-color:var(--gold);box
 .ag-msg{color:var(--red);font-size:13px;min-height:18px;margin-top:12px}
 .shake{animation:agshake .4s}
 @keyframes agshake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
-
-/* ============================================================
-   整合版排桌規劃
-   ============================================================ */
-.plan-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.plan-toolbar .btn{width:auto}
-.plan-subtabs{display:flex;background:#F1EBE4;border:1px solid var(--line);border-radius:12px;padding:3px;margin-bottom:12px}
-.plan-subtabs button{flex:1;padding:10px;border-radius:9px;font-size:14px;color:var(--muted)}
-.plan-subtabs button.on{background:#fff;color:var(--wine);font-weight:700;box-shadow:var(--shadow-sm)}
-.plan-search{display:flex;gap:8px;margin-bottom:10px}
-.plan-search input{flex:1}
-.plan-box{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden;margin-bottom:11px;box-shadow:var(--shadow-sm)}
-.plan-box-head{display:flex;align-items:center;gap:7px;padding:9px 10px;background:#F7F2EC;border-bottom:1px solid var(--line)}
-.plan-box-head .title{font-weight:700;flex:1;min-width:0}
-.plan-box-head .meta{font-size:12px;color:var(--muted);white-space:nowrap}
-.plan-box-head .mini{width:auto;padding:4px 8px;border:1px solid var(--line);border-radius:8px;background:#fff;font-size:12px}
-.plan-list{max-height:360px;overflow:auto}
-.plan-row{display:flex;align-items:center;gap:6px;min-height:37px;padding:5px 7px;border-bottom:1px solid var(--line);font-size:13px;background:#fff}
-.plan-row:last-child{border-bottom:0}
-.plan-row.sel{background:#F8EDEF}
-.plan-row input[type=checkbox]{width:18px;height:18px;accent-color:var(--wine);flex:0 0 auto}
-.plan-row .name{flex:1;min-width:0;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.plan-row .rel{font-size:10px;color:var(--muted);max-width:90px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.plan-row .heads{font-size:12px;font-weight:700;white-space:nowrap;color:var(--wine)}
-.plan-row .confirm{font-size:10px;white-space:nowrap;color:var(--green)}
-.plan-row .wait{color:#A9782D}
-.plan-row .edit{width:30px;height:30px;border-radius:8px;background:var(--ivory);border:1px solid var(--line);flex:0 0 auto}
-.plan-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
-.plan-pool{border:1px dashed var(--gold);background:#FFFDF8}
-.plan-assign{position:sticky;bottom:72px;z-index:45;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);
-  border:1px solid var(--line);border-radius:14px;padding:8px;margin-top:12px;box-shadow:0 -4px 20px rgba(94,30,45,.08)}
-.plan-assign .hint{font-size:12px;color:var(--muted);margin:0 0 6px 3px}
-.plan-chiprow{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
-.plan-chip{flex:0 0 auto;padding:8px 11px;border-radius:18px;border:1px solid var(--line);background:#fff;font-size:12px;white-space:nowrap}
-.plan-chip.primary{background:var(--wine);color:#fff;border-color:var(--wine)}
-.plan-check{display:flex;align-items:center;gap:7px;padding:10px 11px;border:1px solid var(--line);border-radius:10px;background:var(--ivory);font-size:14px}
-.plan-check input{width:19px;height:19px;accent-color:var(--wine)}
-.plan-cap-ok{color:var(--green)}
-.plan-cap-full{color:var(--wine)}
-.plan-cap-over{color:var(--red);font-weight:700}
-
-/* 排桌報表 */
-.plan-report{position:fixed;inset:0;z-index:400;background:#F7F4EF;overflow:auto;padding:18px}
-.plan-report-bar{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;gap:8px;align-items:center;
-  background:rgba(247,244,239,.96);backdrop-filter:blur(8px);padding:8px 0 12px}
-.plan-report-bar .actions{display:flex;gap:8px}
-.plan-report-bar button{padding:9px 13px;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:14px}
-.plan-report-bar .print{background:var(--wine);color:#fff;border-color:var(--wine)}
-.plan-report-paper{max-width:1100px;margin:0 auto;background:#fff;padding:22px;border:1px solid var(--line);box-shadow:var(--shadow)}
-.plan-report-title{text-align:center;margin-bottom:14px}
-.plan-report-title h2{font-family:"Noto Serif TC",serif;font-size:24px}
-.plan-report-title p{font-size:12px;color:var(--muted);margin:3px 0 0}
-.detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
-.detail-table{border:1px solid #CFC5B7;break-inside:avoid}
-.detail-head{display:flex;justify-content:space-between;gap:10px;background:#F3EEE7;padding:7px 9px;font-weight:700;border-bottom:1px solid #CFC5B7}
-.detail-list{width:100%;border-collapse:collapse}
-.detail-list td{padding:5px 8px;border-bottom:1px solid #E8E1D8;font-size:12px}
-.detail-list tr:last-child td{border-bottom:0}
-.detail-list td:last-child{text-align:right;white-space:nowrap}
-
-/* 帶位空格版 */
-.usher-grid2{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;align-items:start}
-.usher-card2{border:1px solid #AFA69B;break-inside:avoid;background:#fff}
-.usher-head2{background:var(--wine);color:#fff;text-align:center;font-weight:700;padding:5px;font-size:11px}
-.usher-slots2{display:grid;grid-template-columns:1fr}
-.usher-slot2{height:25px;border-bottom:1px solid #D9D2C9;padding:4px 5px;font-size:9px;font-weight:600;
-  display:flex;align-items:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.usher-slot2:last-child{border-bottom:0}
-.usher-slot2.empty{color:transparent}
-.usher-legend{font-size:9px;color:#777;margin-top:8px;text-align:right}
-
-@media(max-width:720px){
-  .plan-grid{grid-template-columns:1fr}
-  .detail-grid{grid-template-columns:1fr}
-  .usher-grid2{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media print{
-  @page{size:A4 landscape;margin:7mm}
-  body.print-plan>*:not(#planReport){display:none!important}
-  body.print-plan{background:#fff!important;padding:0!important}
-  #planReport{position:static!important;display:block!important;overflow:visible!important;padding:0!important;background:#fff!important}
-  #planReport .plan-report-bar{display:none!important}
-  #planReport .plan-report-paper{max-width:none!important;border:0!important;box-shadow:none!important;padding:0!important}
-  #planReport .usher-grid2{grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
-  #planReport .usher-head2{font-size:10px;padding:4px}
-  #planReport .usher-slot2{height:23px;font-size:9px;padding:3px 4px}
-  #planReport .detail-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
-}
-
 </style>
 </head>
 <body>
@@ -444,7 +359,7 @@ select.inp:focus,input.inp:focus,textarea.inp:focus{border-color:var(--gold);box
 <nav class="tabs" id="tabs">
   <button data-v="checkin" class="active"><span class="ic">✅</span>報到</button>
   <button data-v="dashboard"><span class="ic">📊</span>現況</button>
-  <button data-v="seating"><span class="ic">🪑</span>規劃</button>
+  <button data-v="seating"><span class="ic">🪑</span>桌次</button>
   <button data-v="guests"><span class="ic">👥</span>賓客</button>
   <button data-v="lottery"><span class="ic">🎁</span>抽獎</button>
   <button data-v="audit"><span class="ic">📋</span>紀錄</button>
@@ -712,7 +627,10 @@ function viewDashboard(){
   const arrived=gs.filter(g=>g.arrived);
   const arrivedHeads=arrived.reduce((s,g)=>s+(g.partySize||1),0);
   const pct=totalHeads?Math.round(arrivedHeads/totalHeads*100):0;
-  const giftTotal=arrived.reduce((s,g)=>s+(Number(g.giftAmount)||0),0);
+  const noShowList=gs.filter(g=>g.giftOnly&&!g.arrived);
+  const giftOnlyHeads=noShowList.reduce((s,g)=>s+(g.partySize||1),0);
+  const prepaidList=gs.filter(g=>g.prepaid&&!g.arrived);
+  const giftTotal=gs.filter(g=>g.arrived||g.giftOnly||g.prepaid).reduce((s,g)=>s+(Number(g.giftAmount)||0),0);
   const cookieNeed=gs.filter(g=>g.needsCookie).length;
   const cookieGiven=gs.filter(g=>g.needsCookie&&g.cookieGiven).length;
 
@@ -738,8 +656,8 @@ function viewDashboard(){
 
   <div class="stat-grid">
     <div class="stat green tappable" onclick="openGuestListSheet('arrived')"><span class="corner">🎉</span><div class="num">${arrivedHeads}</div><div class="lbl">已報到人數 ›</div></div>
-    <div class="stat tappable" onclick="openGuestListSheet('pending')"><span class="corner">⏳</span><div class="num">${totalHeads-arrivedHeads}</div><div class="lbl">尚未報到人數 ›</div></div>
-    <div class="stat gold tappable" onclick="openGuestListSheet('cookie')"><span class="corner">🍪</span><div class="num">${cookieGiven}<span style="font-size:20px;color:var(--muted)">/${cookieNeed}</span></div><div class="lbl">喜餅已發 / 需發（可點修改）›</div></div>
+    <div class="stat tappable" onclick="openGuestListSheet('pending')"><span class="corner">⏳</span><div class="num">${totalHeads-arrivedHeads-giftOnlyHeads}</div><div class="lbl">尚未報到人數 ›</div></div>
+    <div class="stat gold tappable" onclick="openGuestListSheet('cookie')"><span class="corner">🍪</span><div class="num">${cookieGiven}<span style="font-size:20px;color:var(--muted)">/${cookieNeed}</span></div><div class="lbl">喜餅已發 / 需發 ›</div></div>
     <div class="stat"><span class="corner">🪑</span><div class="num">${tbls.length}</div><div class="lbl">總桌數</div></div>
   </div>
 
@@ -747,6 +665,7 @@ function viewDashboard(){
     <div>
       <div style="font-size:13px;color:var(--muted);letter-spacing:1px">禮金累計</div>
       <div class="gift-amt">${giftVisible?fmtMoney(giftTotal):"$ ••••••"}</div>
+      ${(noShowList.length+prepaidList.length)?`<div style="font-size:12px;color:#B07A2E;margin-top:2px">含未到/預收 ${noShowList.length+prepaidList.length} 筆</div>`:""}
     </div>
     ${giftVisible
       ? `<div style="display:flex;gap:8px"><button class="eye-btn" onclick="openGiftDetail()">📋 明細</button><button class="eye-btn" onclick="giftVisible=false;render()">🙈 隱藏</button></div>`
@@ -789,7 +708,7 @@ function byTableThenName(a,b){
 function openGuestListSheet(type){
   let gs=guestList(), title, empty;
   if(type==="arrived"){ gs=gs.filter(g=>g.arrived); title="✅ 已報到名單"; empty="還沒有人報到"; }
-  else if(type==="pending"){ gs=gs.filter(g=>!g.arrived); title="⏳ 尚未報到名單"; empty="全部都到齊了 🎉"; }
+  else if(type==="pending"){ gs=gs.filter(g=>!g.arrived&&!g.giftOnly); title="⏳ 尚未報到名單"; empty="全部都到齊了 🎉"; }
   else { gs=gs.filter(g=>g.needsCookie); title="🍪 需給喜餅名單"; empty="沒有需要喜餅的賓客"; }
   if(type==="arrived") gs.sort((a,b)=>(b.arrivedTime||0)-(a.arrivedTime||0));
   else gs.sort(byTableThenName);
@@ -799,7 +718,7 @@ function openGuestListSheet(type){
     const num=g.table?((tn.match(/\d+/)||[tn.slice(0,1)])[0]):"—";
     let right="";
     if(type==="arrived") right=`<div class="gl-sub" style="color:var(--green)">✓ ${timeStr(g.arrivedTime)}</div>${g.checkinBy?`<div class="gl-sub">${esc(g.checkinBy)}</div>`:""}`;
-    else if(type==="pending") right=`<div class="gl-sub">${esc(tn)}</div>`;
+    else if(type==="pending") right=`<div class="gl-sub">${g.prepaid?"💰預收 "+fmtMoney(g.giftAmount):esc(tn)}</div>`;
     else right=g.cookieGiven?`<span class="tag" style="background:var(--green-soft);color:var(--green)">已交付</span>`:`<span class="tag cookie">未交付</span>`;
     return `<div class="gl-row">
       <div class="gl-tnum">${esc(num)}</div>
@@ -807,7 +726,6 @@ function openGuestListSheet(type){
         <div class="gl-sub">${esc(tn)}${g.relation?" · "+esc(g.relation):""}${compNames(g).length?" · 👪 "+esc(compNames(g).slice(0,3).join("、")):""}</div></div>
       <div class="gl-right">${right}</div>
       ${type==="arrived"?`<button class="gl-cancel" onclick="cancelFromList('${g.id}')">取消報到</button>`:""}
-      ${type==="cookie"?`<button class="gl-cancel" style="${g.cookieGiven?'border-color:var(--red);color:var(--red)':'border-color:var(--green);color:var(--green)'}" onclick="toggleCookieFromList('${g.id}')">${g.cookieGiven?'改為未發':'✓ 標記已發'}</button>`:""}
     </div>`;
   }).join(""):`<div class="empty"><div class="e-ic">🕊️</div><div style="font-size:15px">${empty}</div></div>`;
   openSheet(`<div class="sheet-head"><div class="nm">${title}</div>
@@ -815,34 +733,12 @@ function openGuestListSheet(type){
     ${rows}
     <button class="btn btn-ghost" style="margin-top:14px" onclick="closeSheet()">關閉</button>`);
 }
-function toggleCookieFromList(id){
-  if(!requireOp())return;
-  const g=App.state.guests[id]; if(!g)return;
-  const next=!g.cookieGiven;
-  App.commit(s=>{
-    const gg=s.guests[id]; if(!gg)return;
-    gg.cookieGiven=next;
-    gg.lastEditBy=App.operator;
-    gg.lastEditTime=Date.now();
-    pushLog(s,next?"喜餅已發":"喜餅改為未發",next?"in":"ed",gg.name,"從喜餅名單快速修改");
-  });
-  toast((next?"✓ 已標記喜餅發放：":"已改為未發：")+g.name);
-  openGuestListSheet("cookie");
-}
 function cancelFromList(id){
   if(!requireOp())return;
   const g=App.state.guests[id]; if(!g)return;
   if(!confirm(`確定取消「${g.name}」的報到?`))return;
-  App.commit(s=>{
-    const gg=s.guests[id]; if(!gg)return;
-    gg.arrived=false;
-    gg.arrivedTime=null;
-    gg.checkinBy=null;
-    gg.cookieGiven=false;
-    gg.lastEditBy=App.operator;
-    gg.lastEditTime=Date.now();
-    pushLog(s,"取消報到","un",gg.name,"從已報到名單取消"+(gg.needsCookie?" · 喜餅狀態重設為未交付":""));
-  });
+  App.commit(s=>{ const gg=s.guests[id]; if(!gg)return; gg.arrived=false; gg.arrivedTime=null; gg.checkinBy=null;
+    gg.lastEditBy=App.operator; gg.lastEditTime=Date.now(); pushLog(s,"取消報到","un",gg.name,"從已報到名單取消"); });
   toast("已取消 "+g.name+" 的報到");
   openGuestListSheet("arrived");
 }
@@ -853,7 +749,7 @@ function openGiftDetail(){
   bindGiftDetail();
 }
 function giftDetailHTML(){
-  let gs=guestList().filter(g=>g.arrived);
+  let gs=guestList().filter(g=>g.arrived||g.giftOnly||g.prepaid);
   const total=gs.reduce((s,g)=>s+(Number(g.giftAmount)||0),0);
   const withGift=gs.filter(g=>Number(g.giftAmount)>0).length;
   if(giftDetailSort==="amount") gs.sort((a,b)=>(Number(b.giftAmount)||0)-(Number(a.giftAmount)||0));
@@ -862,7 +758,7 @@ function giftDetailHTML(){
     const tn=g.table?tableName(g.table):"未排桌";
     return `<div class="gl-row">
       <div class="gl-info"><div class="gl-name">${esc(g.name)}${g.partySize>1?`<span style="color:#7A5A82;font-size:13px"> +${g.partySize-1}</span>`:""}</div>
-        <div class="gl-sub">${esc(tn)}${g.checkinBy?" · "+esc(g.checkinBy):""} · ${timeStr(g.arrivedTime)}</div></div>
+        <div class="gl-sub">${esc(tn)}${g.giftOnly&&!g.arrived?" · 🚫未到":g.prepaid&&!g.arrived?" · 💰預收":(g.checkinBy?" · "+esc(g.checkinBy):"")}${g.arrived?" · "+timeStr(g.arrivedTime):""}</div></div>
       <div class="gl-amt">${Number(g.giftAmount)>0?fmtMoney(g.giftAmount):'<span style="color:var(--muted);font-size:14px">—</span>'}</div>
     </div>`;
   }).join(""):`<div class="empty"><div class="e-ic">💰</div><div style="font-size:15px">還沒有報到的禮金紀錄</div></div>`;
@@ -899,7 +795,7 @@ function openWalkin(){
   if(!requireOp())return;
   const tbls=tableList();
   openSheet(`<div class="sheet-head"><div class="nm">現場新增賓客</div>
-    <div class="meta"><span>不在名單內的賓客,建立後直接報到</span></div></div>
+    <div class="meta"><span>不在名單內的賓客,填完後選擇狀態</span></div></div>
     <div class="field-lbl" style="margin-top:0">姓名 / 稱謂</div>
     <input class="inp" id="wkName" placeholder="例如 王大明 / 陳先生一家">
     <div class="two">
@@ -909,25 +805,45 @@ function openWalkin(){
     </div>
     <div class="field-lbl">桌次</div>
     <select class="inp" id="wkTable"><option value="">未排桌</option>${tbls.map(t=>`<option value="${t.id}">${esc(t.name)}</option>`).join("")}</select>
-    <div class="cookie-banner no" id="wkCkBanner" style="margin-top:16px">
+    <div class="field-lbl">禮金金額(可留空)</div>
+    <div class="gift-input"><span class="ntd">NT$</span><input id="wkGift" type="number" inputmode="numeric" placeholder="0"></div>
+    <div class="quick-amt" style="margin-top:8px">${QUICK_AMTS_1.concat(QUICK_AMTS_2).map(a=>`<button onclick="wkSetGift(${a})">${a.toLocaleString()}</button>`).join("")}<button onclick="wkSetGift(0)" style="color:var(--muted)">清除</button></div>
+    <div class="cookie-banner no" id="wkCkBanner" style="margin-top:14px">
       <span class="cb-ic">🍪</span><div class="cb-t"><b>需要給喜餅嗎?</b><span>報到時會提醒工作人員</span></div>
       <div class="toggle" id="wkCookie"></div></div>
-    <div class="btn-row"><button class="btn btn-ghost" onclick="closeSheet()">取消</button>
-      <button class="btn btn-primary" onclick="doWalkin()">建立並報到 →</button></div>`);
+    <div style="margin-top:16px">
+      <button class="btn btn-primary" style="width:100%" onclick="doWalkin('arrive')">✓ 建立並報到(來了)</button>
+      <button class="btn btn-green" style="width:100%;margin-top:9px" onclick="doWalkin('prepaid')">💰 預收 · 會到(還沒報到)</button>
+      <button class="btn btn-ghost" style="width:100%;margin-top:9px;color:#B07A2E;border-color:#EBC79A" onclick="doWalkin('giftonly')">🚫 不克出席 · 僅收禮金</button>
+      <button class="btn btn-ghost" style="width:100%;margin-top:9px" onclick="doWalkin('pending')">＋ 先加入名單(還沒到)</button>
+      <button class="btn btn-ghost" style="width:100%;margin-top:9px" onclick="closeSheet()">取消</button>
+    </div>`);
   segBind("wkSide");
+  window.wkSetGift=(a)=>{ const i=$("#wkGift"); if(i)i.value=a||""; };
   const ck=$("#wkCookie"),bn=$("#wkCkBanner");
   ck._v=false; ck.onclick=()=>{ck._v=!ck._v;ck.classList.toggle("on",ck._v);bn.classList.toggle("need",ck._v);bn.classList.toggle("no",!ck._v);};
 }
-function doWalkin(){
+function doWalkin(mode){
   const name=($("#wkName").value||"").trim(); if(!name){ toast("請輸入姓名"); return; }
+  if(!requireOp())return;
   const ps=Math.max(1,parseInt($("#wkParty").value)||1);
   const side=$("#wkSide").dataset.sel||"共同";
   const table=$("#wkTable").value||null;
   const need=$("#wkCookie")._v;
+  const amt=Number(($("#wkGift")||{}).value)||0;
   const id=uid();
-  App.commit(s=>{ s.guests[id]={name,side,relation:"現場新增",table,needsCookie:need,partySize:ps,arrived:false,giftAmount:0,cookieGiven:false,companions:[]};
-    pushLog(s,"現場新增","ed",name,ps+"人"); });
-  openCheckin(id);
+  App.commit(s=>{
+    const g={name,side,relation:"現場新增",table,needsCookie:need,partySize:ps,arrived:false,giftAmount:0,cookieGiven:false,companions:[]};
+    if(mode==="arrive"){ g.arrived=true; g.giftAmount=amt; g.arrivedTime=Date.now(); g.checkinBy=App.operator; }
+    else if(mode==="prepaid"){ g.prepaid=true; g.giftAmount=amt; g.giftTime=Date.now(); }
+    else if(mode==="giftonly"){ g.giftOnly=true; g.giftAmount=amt; g.giftTime=Date.now(); }
+    g.lastEditBy=App.operator; g.lastEditTime=Date.now();
+    s.guests[id]=g;
+    const label=mode==="arrive"?"現場新增·報到":mode==="prepaid"?"現場新增·預收":mode==="giftonly"?"現場新增·未到收禮":"現場新增·加入名單";
+    pushLog(s,label,mode==="pending"?"ed":"in",name,amt?`禮金 ${fmtMoney(amt)}`:ps+"人");
+  });
+  ciSearch=""; closeSheet(); toast(`已新增 ${name}`);
+  if(currentView==="checkin"){ const si=$("#ciSearchInput"); if(si){ si.value=""; si.focus(); } }
 }
 function viewCheckin(){
   const gs=guestList();
@@ -940,8 +856,10 @@ function viewCheckin(){
   </div>
   <div class="filter-row">
     <button class="chip ${ciFilter==='all'?'on':''}" data-f="all">全部<span class="b">${gs.length}</span></button>
-    <button class="chip ${ciFilter==='pending'?'on':''}" data-f="pending">未報到<span class="b">${gs.length-arrivedN}</span></button>
+    <button class="chip ${ciFilter==='pending'?'on':''}" data-f="pending">未報到<span class="b">${gs.filter(g=>!g.arrived&&!g.giftOnly).length}</span></button>
     <button class="chip ${ciFilter==='done'?'on':''}" data-f="done">已報到<span class="b">${arrivedN}</span></button>
+    <button class="chip ${ciFilter==='prepaid'?'on':''}" data-f="prepaid">已預收<span class="b">${gs.filter(g=>g.prepaid&&!g.arrived).length}</span></button>
+    <button class="chip ${ciFilter==='giftonly'?'on':''}" data-f="giftonly">未到收禮<span class="b">${gs.filter(g=>g.giftOnly&&!g.arrived).length}</span></button>
     <button class="chip ${ciFilter==='cookie'?'on':''}" data-f="cookie">待發喜餅<span class="b">${gs.filter(g=>g.needsCookie&&g.arrived&&!g.cookieGiven).length}</span></button>
   </div>
   <div id="ciList">${renderCiList()}</div>`;
@@ -950,19 +868,24 @@ function renderCiList(){
   let gs=guestList();
   const q=ciSearch.trim().toLowerCase();
   if(q) gs=gs.filter(g=>(g.name||"").toLowerCase().includes(q)||compNames(g).some(n=>n.toLowerCase().includes(q)));
-  if(ciFilter==="pending") gs=gs.filter(g=>!g.arrived);
+  if(ciFilter==="pending") gs=gs.filter(g=>!g.arrived&&!g.giftOnly);
   if(ciFilter==="done") gs=gs.filter(g=>g.arrived);
+  if(ciFilter==="giftonly") gs=gs.filter(g=>g.giftOnly&&!g.arrived);
+  if(ciFilter==="prepaid") gs=gs.filter(g=>g.prepaid&&!g.arrived);
   if(ciFilter==="cookie") gs=gs.filter(g=>g.needsCookie&&g.arrived&&!g.cookieGiven);
+  const _rank=g=>(!g.arrived&&!g.giftOnly)?0:(g.arrived?1:2);
   gs.sort((a,b)=>{
-    if(!!a.arrived!==!!b.arrived) return a.arrived?1:-1;
-    if(a.arrived&&b.arrived) return (b.arrivedTime||0)-(a.arrivedTime||0);
-    return (a.name||"").localeCompare(b.name||"","zh-Hant");
+    const ra=_rank(a),rb=_rank(b);
+    if(ra!==rb) return ra-rb;
+    if(ra===0) return (a.name||"").localeCompare(b.name||"","zh-Hant");
+    if(ra===1) return (b.arrivedTime||0)-(a.arrivedTime||0);
+    return (b.giftTime||0)-(a.giftTime||0);
   });
   if(gs.length===0) return emptyBox("🔍","找不到賓客",q?`沒有符合「${esc(ciSearch)}」的賓客`:"換個篩選條件看看");
   return gs.map(g=>{
     const tn=g.table?tableName(g.table):null;
     const cn=compNames(g);
-    return `<div class="g-card ${g.arrived?'done':''}" onclick="openCheckin('${g.id}')">
+    return `<div class="g-card ${g.arrived?'done':g.giftOnly?'giftonly':g.prepaid?'prepaid':''}" onclick="openCheckin('${g.id}')">
       <div class="g-tbl"><div class="t-num">${tn?esc(tn.replace(/[^0-9]/g,'')||tn.slice(0,2)):"—"}</div><div class="t-lbl">${tn?"":"未排桌"}</div></div>
       <div class="g-info">
         <div class="g-name">
@@ -977,8 +900,13 @@ function renderCiList(){
       <div class="g-right">
         ${g.arrived
           ? `<div class="g-gift">${g.giftAmount?fmtMoney(g.giftAmount):"已到"}</div><div class="g-status ok">✓ ${timeStr(g.arrivedTime)}</div>`
-          : `<div class="g-status">輕觸報到</div>`}
+          : g.giftOnly
+            ? `<div class="g-gift">${g.giftAmount?fmtMoney(g.giftAmount):""}</div><div class="g-status" style="color:#B07A2E">🚫 未到·收禮</div>`
+            : g.prepaid
+              ? `<div class="g-gift" style="color:#2F6B54">${g.giftAmount?fmtMoney(g.giftAmount):""}</div><div class="g-status" style="color:#2F6B54">💰 已預收·待到</div>`
+              : `<div class="g-status">輕觸報到</div>`}
       </div>
+      <button class="g-edit" onclick="event.stopPropagation();openGuestEdit('${g.id}')" title="編輯資料">✎</button>
     </div>`;
   }).join("");
 }
@@ -1020,10 +948,9 @@ function openCheckin(id){
 
     ${g.partySize>1?`<div class="party-box">
       <div class="pb-title">👪 本帖共 ${g.partySize} 位 · 一起報到</div>
-      <div class="pb-list">
-        <span class="pb-name lead">${esc(g.name)}</span>
-        ${(Array.isArray(g.companions)?g.companions:[]).map(c=>`<span class="pb-name">${c&&c.trim()?esc(c):"同行"}</span>`).join("")}
-      </div>
+      ${(Array.isArray(g.companions)?g.companions:[]).filter(c=>c&&c.trim()).length?`<div class="pb-list">
+        ${(Array.isArray(g.companions)?g.companions:[]).filter(c=>c&&c.trim()).map(c=>`<span class="pb-name">${esc(c)}</span>`).join("")}
+      </div>`:""}
     </div>`:""}
 
     <div class="cookie-banner ${g.needsCookie?'need':'no'}">
@@ -1049,75 +976,114 @@ function openCheckin(id){
       <button onclick="setGift(0)" style="color:var(--muted)">清除</button>
     </div>
 
+    ${!g.arrived&&!g.prepaid?`<div class="cookie-banner ${g.giftOnly?'need':'no'}" id="nsRow" style="margin-top:4px">
+      <span class="cb-ic">🚫</span>
+      <div class="cb-t"><b>不克出席 · 僅收禮金</b><span>不算到場人數,禮金仍計入總額</span></div>
+      <div class="toggle ${g.giftOnly?'on':''}" id="nsTog"></div>
+    </div>`:""}
+    ${g.prepaid&&!g.arrived?`<div class="cookie-banner" style="background:#EAF3F0;border-color:#BEDDD1;color:#2F6B54;margin-top:4px">
+      <span class="cb-ic">💰</span>
+      <div class="cb-t"><b>禮金已預收 ${fmtMoney(g.giftAmount)}</b><span>本人會到,現場點「完成報到」即可</span></div>
+    </div>`:""}
+
     <div class="btn-row">
       ${g.arrived
         ? `<button class="btn btn-ghost" onclick="undoCheckin('${id}')">取消報到</button>
            <button class="btn btn-green" id="ciConfirmBtn" onclick="confirmCheckin('${id}')">💾 更新</button>`
-        : `<button class="btn btn-ghost" onclick="closeSheet()">取消</button>
-           <button class="btn btn-primary" id="ciConfirmBtn" onclick="confirmCheckin('${id}')">✓ 完成報到</button>`}
+        : g.giftOnly
+          ? `<button class="btn btn-ghost" onclick="undoGiftOnly('${id}')" style="color:var(--red)">清除未到禮金</button>
+             <button class="btn btn-primary" id="ciConfirmBtn" onclick="confirmCheckin('${id}')">💾 更新</button>`
+          : g.prepaid
+            ? `<button class="btn btn-ghost" onclick="undoPrepay('${id}')" style="color:var(--red)">清除預收</button>
+               <button class="btn btn-primary" id="ciConfirmBtn" onclick="confirmCheckin('${id}')">✓ 完成報到</button>`
+            : `<button class="btn btn-green" onclick="doPrepay('${id}')">💰 先收禮金·會到</button>
+               <button class="btn btn-primary" id="ciConfirmBtn" onclick="confirmCheckin('${id}')">✓ 完成報到</button>`}
     </div>
+    ${!g.arrived&&!g.giftOnly&&!g.prepaid?`<button class="btn btn-ghost" style="width:100%;margin-top:10px" onclick="closeSheet()">取消</button>`:""}
   `);
 
-  // toggle 行為 + 需喜餅時鎖住報到按鈕
+  // 狀態:喜餅鎖 + 不克出席(僅收禮金)
+  let noShow = !!g.giftOnly;
   const confirmBtn=$("#ciConfirmBtn");
-  if(confirmBtn) confirmBtn.dataset.label=confirmBtn.textContent;
-  function updateCkLock(){
+  const baseLabel = (g.arrived||g.giftOnly) ? "💾 更新" : "✓ 完成報到";
+  function updateModalState(){
     if(!confirmBtn) return;
-    // 只有第一次報到時，需喜餅者必須先標記已交付。
-    // 已報到的賓客可自由把喜餅狀態改回「未交付」並儲存。
-    if(!g.arrived && g.needsCookie && !cookieGiven){
-      confirmBtn.classList.add("locked");
-      confirmBtn.disabled=true;
-      confirmBtn.textContent="🔒 請先交付喜餅";
-    }else{
-      confirmBtn.classList.remove("locked");
-      confirmBtn.disabled=false;
-      confirmBtn.textContent=confirmBtn.dataset.label;
-    }
+    const locked = g.needsCookie && !cookieGiven && !noShow;
+    confirmBtn.disabled = locked;
+    confirmBtn.classList.toggle("locked", locked);
+    confirmBtn.textContent = locked ? "🔒 請先交付喜餅" : (noShow ? "登錄禮金(未到)" : baseLabel);
   }
   const tog=$("#ckTog");
   if(tog){ tog.onclick=()=>{ cookieGiven=!cookieGiven; tog.classList.toggle("on",cookieGiven);
-    const l=$("#ckLbl"); if(l) l.textContent=cookieGiven?"✓ 喜餅已交付":"切換上方開關標記已交付"; updateCkLock(); }; }
-  updateCkLock();
+    const l=$("#ckLbl"); if(l) l.textContent=cookieGiven?"✓ 喜餅已交付":"切換上方開關標記已交付"; updateModalState(); }; }
+  const nsTog=$("#nsTog"), nsRow=$("#nsRow");
+  if(nsTog){ nsTog.onclick=()=>{ noShow=!noShow; nsTog.classList.toggle("on",noShow);
+    if(nsRow){ nsRow.classList.toggle("need",noShow); nsRow.classList.toggle("no",!noShow); } updateModalState(); }; }
+  updateModalState();
   window.setGift=(a)=>{ $("#giftIn").value=a||""; refreshGiftBtns(); };
   const giftInEl=$("#giftIn");
   if(giftInEl){ giftInEl.oninput=refreshGiftBtns; }
   refreshGiftBtns();
   window.confirmCheckin=(gid)=>{
     if(!App.operator){ toast("請先在右上角選擇操作人員"); showIdentify(); return; }
+    const ns=$("#nsTog")&&$("#nsTog").classList.contains("on");
     const gLock=App.state.guests[gid];
-    if(gLock && !gLock.arrived && gLock.needsCookie){
-      const on=$("#ckTog")&&$("#ckTog").classList.contains("on");
-      if(!on){ toast("請先滑開喜餅開關（標記已交付）才能完成報到"); return; }
-    }
+    if(!ns && gLock && gLock.needsCookie){ const on=$("#ckTog")&&$("#ckTog").classList.contains("on"); if(!on){ toast("請先滑開喜餅開關(標記已交付)才能完成報到"); return; } }
     const amt=Number($("#giftIn").value)||0;
     const cg=$("#ckTog")?$("#ckTog").classList.contains("on"):!!App.state.guests[gid].cookieGiven;
     App.commit(s=>{
       const gg=s.guests[gid];
-      const first=!gg.arrived;
-      gg.arrived=true; gg.giftAmount=amt; gg.cookieGiven=cg;
-      if(first||!gg.arrivedTime){ gg.arrivedTime=Date.now(); gg.checkinBy=App.operator; }
-      gg.lastEditBy=App.operator; gg.lastEditTime=Date.now();
-      const detail=`禮金 ${fmtMoney(amt)}${gg.needsCookie?(cg?" · 喜餅已交付":" · 喜餅未交付"):""}`;
-      pushLog(s, first?"報到":"修改報到", first?"in":"ed", gg.name, detail);
+      if(ns){
+        gg.giftOnly=true; gg.arrived=false; gg.arrivedTime=null; gg.checkinBy=null;
+        gg.giftAmount=amt; gg.cookieGiven=cg; gg.giftTime=Date.now();
+        gg.lastEditBy=App.operator; gg.lastEditTime=Date.now();
+        pushLog(s,"未到收禮","in",gg.name,`禮金 ${fmtMoney(amt)}(不克出席)`);
+      } else {
+        const first=!gg.arrived;
+        gg.arrived=true; gg.giftOnly=false; gg.prepaid=false; gg.giftAmount=amt; gg.cookieGiven=cg;
+        if(first||!gg.arrivedTime){ gg.arrivedTime=Date.now(); gg.checkinBy=App.operator; }
+        gg.lastEditBy=App.operator; gg.lastEditTime=Date.now();
+        const detail=`禮金 ${fmtMoney(amt)}${gg.needsCookie?(cg?" · 喜餅已交付":" · 喜餅未交付"):""}`;
+        pushLog(s, first?"報到":"修改報到", first?"in":"ed", gg.name, detail);
+      }
     });
     const _nm=App.state.guests[gid]?App.state.guests[gid].name:"";
-    ciSearch=""; closeSheet(); toast(`✓ ${_nm} 報到完成`);
+    ciSearch=""; closeSheet(); toast(ns?`已登錄 ${_nm} 未到禮金`:`✓ ${_nm} 報到完成`);
     if(currentView==="checkin"){ const si=$("#ciSearchInput"); if(si){ si.value=""; si.focus(); } }
   };
   window.undoCheckin=(gid)=>{
     if(!App.operator){ toast("請先在右上角選擇操作人員"); showIdentify(); return; }
-    App.commit(s=>{
-      const gg=s.guests[gid];
-      gg.arrived=false;
-      gg.arrivedTime=null;
-      gg.checkinBy=null;
-      gg.cookieGiven=false;
-      gg.lastEditBy=App.operator;
-      gg.lastEditTime=Date.now();
-      pushLog(s,"取消報到","un",gg.name,gg.needsCookie?"喜餅狀態已重設為未交付":"");
-    });
+    App.commit(s=>{ const gg=s.guests[gid]; gg.arrived=false; gg.arrivedTime=null; gg.checkinBy=null;
+      gg.lastEditBy=App.operator; gg.lastEditTime=Date.now();
+      pushLog(s,"取消報到","un",gg.name,""); });
     closeSheet(); toast("已取消報到");
+  };
+  window.undoGiftOnly=(gid)=>{
+    if(!App.operator){ toast("請先在右上角選擇操作人員"); showIdentify(); return; }
+    App.commit(s=>{ const gg=s.guests[gid]; gg.giftOnly=false; gg.giftAmount=0; gg.giftTime=null;
+      gg.lastEditBy=App.operator; gg.lastEditTime=Date.now();
+      pushLog(s,"清除未到禮金","un",gg.name,""); });
+    closeSheet(); toast("已清除未到禮金");
+  };
+  window.doPrepay=(gid)=>{
+    if(!App.operator){ toast("請先在右上角選擇操作人員"); showIdentify(); return; }
+    const amt=Number($("#giftIn").value)||0;
+    const cg=$("#ckTog")?$("#ckTog").classList.contains("on"):!!App.state.guests[gid].cookieGiven;
+    App.commit(s=>{ const gg=s.guests[gid];
+      gg.prepaid=true; gg.giftOnly=false; gg.arrived=false; gg.arrivedTime=null; gg.checkinBy=null;
+      gg.giftAmount=amt; gg.cookieGiven=cg; gg.giftTime=Date.now();
+      gg.lastEditBy=App.operator; gg.lastEditTime=Date.now();
+      pushLog(s,"預收禮金","in",gg.name,`禮金 ${fmtMoney(amt)}(會到,待報到)`); });
+    const _nm=App.state.guests[gid]?App.state.guests[gid].name:"";
+    ciSearch=""; closeSheet(); toast(`已登錄 ${_nm} 預收禮金`);
+    if(currentView==="checkin"){ const si=$("#ciSearchInput"); if(si){ si.value=""; si.focus(); } }
+  };
+  window.undoPrepay=(gid)=>{
+    if(!App.operator){ toast("請先在右上角選擇操作人員"); showIdentify(); return; }
+    App.commit(s=>{ const gg=s.guests[gid]; gg.prepaid=false; gg.giftAmount=0; gg.giftTime=null;
+      gg.lastEditBy=App.operator; gg.lastEditTime=Date.now();
+      pushLog(s,"清除預收","un",gg.name,""); });
+    closeSheet(); toast("已清除預收");
   };
 }
 
@@ -1292,7 +1258,7 @@ function bindGuests(){
   if(inp){ inp.oninput=()=>{ gAdmSearch=inp.value; $("#gAdmList").innerHTML=renderGuestRows(); }; }
 }
 function openGuestEdit(id){
-  const g=id?App.state.guests[id]:{name:"",side:"",relation:"",group:"",table:null,needsCookie:false,partySize:1,companions:[],note:"",confirmed:true,child:false,vegetarian:false};
+  const g=id?App.state.guests[id]:{name:"",side:"",relation:"",table:null,needsCookie:false,partySize:1,companions:[],note:""};
   const tbls=tableList();
   // 初始同行人:有 companions 用之;舊資料只有 partySize 則補出空白列
   let initComps = Array.isArray(g.companions) ? g.companions.slice() : [];
@@ -1318,31 +1284,10 @@ function openGuestEdit(id){
     <select class="inp" id="gTable"><option value="">未排桌</option>
       ${tbls.map(t=>`<option value="${t.id}" ${g.table===t.id?"selected":""}>${esc(t.name)}</option>`).join("")}</select>
 
-    <div class="field-lbl">婚宴分組</div>
-    <select class="inp" id="gGroup">
-      <option value="">未分組</option>
-      ${planGroups().map(x=>`<option value="${esc(x)}" ${(g.group||"")===x?"selected":""}>${esc(x)}</option>`).join("")}
-    </select>
-
-    <div class="two" style="margin-top:12px">
-      <label class="plan-check"><input type="checkbox" id="gConfirmed" ${g.confirmed===false?"":"checked"}> 人數已確認</label>
-      <label class="plan-check"><input type="checkbox" id="gChild" ${g.child?"checked":""}> ☻ 小孩</label>
-    </div>
-    <label class="plan-check" style="margin-top:8px"><input type="checkbox" id="gVegetarian" ${g.vegetarian?"checked":""}> 🍀 素食</label>
-
     <div class="cookie-banner ${g.needsCookie?'need':'no'}" style="margin-top:16px" id="ckBanner">
       <span class="cb-ic">🍪</span>
-      <div class="cb-t"><b>這帖要給喜餅嗎?</b><span>這是「是否需要喜餅」設定</span></div>
+      <div class="cb-t"><b>這帖要給喜餅嗎?</b><span>報到時工作人員會看到提醒</span></div>
       <div class="toggle ${g.needsCookie?'on':''}" id="gCookie"></div>
-    </div>
-
-    <div id="gCookieGivenWrap" class="${g.needsCookie?'':'hidden'}">
-      <div class="field-lbl" style="margin-top:8px">喜餅發放狀態</div>
-      <div class="seg" id="gCookieGiven">
-        <button class="${g.cookieGiven?'':'on'}" data-f="0">尚未發放</button>
-        <button class="${g.cookieGiven?'on':''}" data-f="1">✓ 已經發放</button>
-      </div>
-      <div style="font-size:12px;color:var(--muted);margin-top:6px">這個狀態可以隨時重新修改，與是否已報到分開記錄。</div>
     </div>
 
     <div class="btn-row">
@@ -1350,24 +1295,9 @@ function openGuestEdit(id){
       <button class="btn btn-primary" onclick="saveGuest('${id||""}')">儲存</button>
     </div>`);
   segBind("gSide");
-  segBind("gCookieGiven");
   let needCookie=!!g.needsCookie;
-  const ck=$("#gCookie"), banner=$("#ckBanner"), givenWrap=$("#gCookieGivenWrap");
-  ck.onclick=()=>{
-    needCookie=!needCookie;
-    ck.classList.toggle("on",needCookie);
-    banner.classList.toggle("need",needCookie);
-    banner.classList.toggle("no",!needCookie);
-    ck._v=needCookie;
-    if(givenWrap) givenWrap.classList.toggle("hidden",!needCookie);
-    if(!needCookie){
-      const seg=$("#gCookieGiven");
-      if(seg){
-        seg.dataset.sel="0";
-        seg.querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.f==="0"));
-      }
-    }
-  };
+  const ck=$("#gCookie"), banner=$("#ckBanner");
+  ck.onclick=()=>{ needCookie=!needCookie; ck.classList.toggle("on",needCookie); banner.classList.toggle("need",needCookie); banner.classList.toggle("no",!needCookie); ck._v=needCookie; };
   ck._v=needCookie;
 }
 function compRowHTML(name,i){
@@ -1404,24 +1334,9 @@ function saveGuest(id){
   const relation=$("#gRel").value.trim();
   const table=$("#gTable").value||null;
   const needsCookie=$("#gCookie")._v;
-  const cookieGiven=needsCookie && $("#gCookieGiven") ? ($("#gCookieGiven").dataset.sel==="1") : false;
-  const group=($("#gGroup")||{}).value||"";
-  const confirmed=!!($("#gConfirmed")&&$("#gConfirmed").checked);
-  const child=!!($("#gChild")&&$("#gChild").checked);
-  const vegetarian=!!($("#gVegetarian")&&$("#gVegetarian").checked);
   App.commit(s=>{
-    if(id){
-      const beforeGiven=!!s.guests[id].cookieGiven;
-      Object.assign(s.guests[id],{name,side,partySize,companions,relation,group,table,needsCookie,cookieGiven,confirmed,child,vegetarian});
-      if(beforeGiven!==cookieGiven){
-        pushLog(s,cookieGiven?"喜餅已發":"喜餅改為未發",cookieGiven?"in":"ed",name,"從賓客編輯修改");
-      }
-      pushLog(s,"編輯賓客","ed",name,partySize>1?`整帖 ${partySize} 位`:"");
-    }
-    else {
-      s.guests[uid()]={name,side,partySize,companions,relation,group,table,needsCookie,confirmed,child,vegetarian,arrived:false,giftAmount:0,cookieGiven};
-      pushLog(s,"新增賓客","ed",name,partySize>1?`整帖 ${partySize} 位`:"");
-    }
+    if(id){ Object.assign(s.guests[id],{name,side,partySize,companions,relation,table,needsCookie}); pushLog(s,"編輯賓客","ed",name,partySize>1?`整帖 ${partySize} 位`:""); }
+    else { s.guests[uid()]={name,side,partySize,companions,relation,table,needsCookie,arrived:false,giftAmount:0,cookieGiven:false}; pushLog(s,"新增賓客","ed",name,partySize>1?`整帖 ${partySize} 位`:""); }
   });
   closeSheet(); toast("已儲存");
 }
@@ -1869,353 +1784,6 @@ function downloadFile(name,content,type){
 }
 function emptyBox(ic,title,sub){ return `<div class="empty"><div class="e-ic">${ic}</div><div style="font-weight:500;font-size:16px;margin-bottom:4px">${title}</div><div style="font-size:14px">${sub}</div></div>`; }
 
-
-/* ============================================================
-   整合版：分組 / 排桌 / 帶位報表
-   與 Firebase App.state 共用同一份資料
-   ============================================================ */
-let planMode="group";
-let planSel=new Set();
-let planSearch="";
-
-function planGroups(){
-  return (App.state.meta&&Array.isArray(App.state.meta.groups)) ? App.state.meta.groups : [];
-}
-function planDefaultGroups(){
-  const defaults=["爸爸親戚","媽媽親戚","爸爸大榮同事","爸爸求學好友","彩券行","其他"];
-  App.commit(s=>{ if(!s.meta)s.meta={}; s.meta.groups=defaults; });
-  toast("已建立預設分組");
-}
-function weddingTableNo(ord){
-  let no=0,count=0;
-  while(count<ord){ no++; if(no===4||no===14)continue; count++; }
-  return no;
-}
-function tableLabelFrom(t){
-  if(t.label)return t.label;
-  const s=String(t.name||"").trim();
-  if(!s||/主桌/.test(s))return "";
-  const m=s.match(/^第\s*\d+\s*桌(?:[（(](.+?)[）)])?$/);
-  if(m)return (m[1]||"").trim();
-  if(/^第\s*\d+\s*桌$/.test(s))return "";
-  return s;
-}
-function normalizeTablesInState(s){
-  if(!s.tables)s.tables={};
-  let arr=Object.entries(s.tables).map(([id,t])=>({id,t}));
-  let main=arr.find(x=>x.t.main||/主桌|第\s*0\s*桌/.test(x.t.name||"")||x.t.note==="主桌");
-
-  if(!main){
-    const id=uid();
-    s.tables[id]={name:"第 0 桌（主桌）",capacity:12,order:0,note:"",main:true,label:""};
-    main={id,t:s.tables[id]};
-    arr.push(main);
-  }
-
-  main.t.main=true; main.t.capacity=12; main.t.order=0; main.t.name="第 0 桌（主桌）"; main.t.label="";
-
-  const others=arr.filter(x=>x.id!==main.id).sort((a,b)=>(a.t.order||999)-(b.t.order||999));
-  others.forEach((x,i)=>{
-    const ord=i+1, no=weddingTableNo(ord);
-    const label=tableLabelFrom(x.t);
-    x.t.main=false; x.t.capacity=11; x.t.order=ord; x.t.label=label;
-    x.t.name="第 "+no+" 桌"+(label?"（"+label+"）":"");
-  });
-}
-function planNormalizeTables(){
-  App.commit(s=>normalizeTablesInState(s));
-  toast("桌號已整理：主桌 0，跳過 4、14");
-}
-function planAddTable(){
-  App.commit(s=>{
-    normalizeTablesInState(s);
-    const id=uid();
-    s.tables[id]={name:"",capacity:11,order:Object.keys(s.tables).length,note:"",main:false,label:""};
-    normalizeTablesInState(s);
-  });
-}
-function planDeleteTable(id){
-  const t=App.state.tables[id]; if(!t)return;
-  if(t.main){ toast("主桌不能刪除"); return; }
-  if(!confirm("刪除「"+t.name+"」？這桌賓客會回到未入座。"))return;
-  App.commit(s=>{
-    Object.values(s.guests||{}).forEach(g=>{if(g.table===id)g.table=null;});
-    delete s.tables[id];
-    normalizeTablesInState(s);
-  });
-}
-function planRenameTable(id){
-  const t=App.state.tables[id]; if(!t||t.main)return;
-  const cur=t.label||tableLabelFrom(t);
-  const v=prompt("桌次備註名稱（可留空）",cur);
-  if(v===null)return;
-  App.commit(s=>{ s.tables[id].label=v.trim(); normalizeTablesInState(s); });
-}
-function planAddGroup(){
-  const v=(prompt("新增群組名稱")||"").trim(); if(!v)return;
-  App.commit(s=>{
-    if(!s.meta)s.meta={}; if(!Array.isArray(s.meta.groups))s.meta.groups=[];
-    if(!s.meta.groups.includes(v))s.meta.groups.push(v);
-  });
-}
-function planRenameGroup(old){
-  const v=(prompt("修改群組名稱",old)||"").trim(); if(!v||v===old)return;
-  App.commit(s=>{
-    s.meta.groups=(s.meta.groups||[]).map(x=>x===old?v:x);
-    Object.values(s.guests||{}).forEach(g=>{if(g.group===old){g.group=v;if(g.relation===old)g.relation=v;}});
-  });
-}
-function planDeleteGroup(name){
-  if(!confirm("刪除群組「"+name+"」？群組內賓客會變成未分組。"))return;
-  App.commit(s=>{
-    s.meta.groups=(s.meta.groups||[]).filter(x=>x!==name);
-    Object.values(s.guests||{}).forEach(g=>{if(g.group===name)g.group="";});
-  });
-}
-function planToggle(id){
-  if(planSel.has(id))planSel.delete(id); else planSel.add(id);
-  render();
-}
-function planClearSel(){planSel.clear();render();}
-function planAssignGroup(name){
-  if(!planSel.size){toast("請先點選賓客");return;}
-  App.commit(s=>{
-    planSel.forEach(id=>{
-      const g=s.guests[id]; if(!g)return;
-      g.group=name||"";
-      if(name)g.relation=name;
-    });
-  });
-  planSel.clear();
-}
-function planAssignTable(tid){
-  if(!planSel.size){toast("請先點選賓客");return;}
-  App.commit(s=>{planSel.forEach(id=>{if(s.guests[id])s.guests[id].table=tid||null;});});
-  planSel.clear();
-}
-function planSetConfirmed(id,val){
-  App.commit(s=>{if(s.guests[id])s.guests[id].confirmed=!!val;});
-}
-function planGuestHeads(g){return Math.max(0,Number(g.partySize==null?1:g.partySize)||0);}
-function planSum(gs){return gs.reduce((n,g)=>n+planGuestHeads(g),0);}
-function planRow(g,showGroup){
-  const selected=planSel.has(g.id);
-  const conf=g.confirmed===false?'<span class="confirm wait">待確認</span>':'<span class="confirm">✓確認</span>';
-  return `<div class="plan-row ${selected?'sel':''}" onclick="planToggle('${g.id}')">
-    <input type="checkbox" ${selected?'checked':''} onclick="event.stopPropagation();planToggle('${g.id}')">
-    <span class="name">${esc(g.name)}</span>
-    ${showGroup?`<span class="rel">${esc(g.group||g.relation||"未分組")}</span>`:""}
-    <span class="heads">${planGuestHeads(g)}人</span>
-    <label style="display:flex;align-items:center;gap:3px" onclick="event.stopPropagation()">
-      <input type="checkbox" ${g.confirmed===false?'':'checked'} onchange="planSetConfirmed('${g.id}',this.checked)">
-      ${conf}
-    </label>
-    <button class="edit" onclick="event.stopPropagation();openGuestEdit('${g.id}')">✎</button>
-  </div>`;
-}
-function planFilteredGuests(){
-  const q=planSearch.trim().toLowerCase();
-  let gs=guestList();
-  if(q)gs=gs.filter(g=>(g.name||"").toLowerCase().includes(q)||compNames(g).some(x=>x.toLowerCase().includes(q)));
-  return gs;
-}
-function setPlanMode(m){planMode=m;planSel.clear();render();}
-function setPlanSearch(v){planSearch=v;render();setTimeout(()=>{const i=$("#planSearch");if(i){i.focus();i.setSelectionRange(i.value.length,i.value.length);}},0);}
-
-function viewSeating(){
-  const gs=planFilteredGuests();
-  const groups=planGroups();
-  const tbls=tableList();
-  const pending=guestList().filter(g=>g.confirmed===false).length;
-
-  let body="";
-  if(planMode==="group"){
-    const un=gs.filter(g=>!g.group);
-    body=`<div class="plan-box plan-pool">
-      <div class="plan-box-head"><span class="title">未分組</span><span class="meta">${un.length}組 / ${planSum(un)}人</span></div>
-      <div class="plan-list">${un.length?un.map(g=>planRow(g,false)).join(""):`<div class="empty" style="padding:24px">全部都分好囉</div>`}</div>
-    </div>
-    ${groups.length?`<div class="plan-grid">${groups.map(name=>{
-      const ms=gs.filter(g=>g.group===name);
-      return `<div class="plan-box">
-        <div class="plan-box-head"><span class="title">${esc(name)}</span><span class="meta">${ms.length}組 / ${planSum(ms)}人</span>
-          <button class="mini" onclick="planRenameGroup('${esc(name).replace(/'/g,"\\'")}')">改名</button>
-          <button class="mini" onclick="planDeleteGroup('${esc(name).replace(/'/g,"\\'")}')">×</button></div>
-        <div class="plan-list">${ms.length?ms.map(g=>planRow(g,false)).join(""):`<div class="empty" style="padding:20px">尚無賓客</div>`}</div>
-      </div>`;
-    }).join("")}</div>`:`<div class="note">尚未建立分組。可以使用你原本的六個分類。</div>`}`;
-
-    body+=`<div class="plan-assign"><div class="hint">已選 ${planSel.size} 組 → 指派群組</div>
-      <div class="plan-chiprow">
-        <button class="plan-chip" onclick="planAssignGroup('')">移回未分組</button>
-        ${groups.map(x=>`<button class="plan-chip primary" onclick="planAssignGroup('${esc(x).replace(/'/g,"\\'")}')">${esc(x)}</button>`).join("")}
-      </div></div>`;
-  }else{
-    const un=gs.filter(g=>!g.table);
-    body=`<div class="plan-box plan-pool">
-      <div class="plan-box-head"><span class="title">尚未入座</span><span class="meta">${un.length}組 / ${planSum(un)}人</span></div>
-      <div class="plan-list">${un.length?un.map(g=>planRow(g,true)).join(""):`<div class="empty" style="padding:24px">全部都入座了</div>`}</div>
-    </div>
-    <div class="plan-grid">${tbls.map(t=>{
-      const ms=gs.filter(g=>g.table===t.id), heads=planSum(ms), cap=t.capacity||(t.main?12:11);
-      const cls=heads>cap?"plan-cap-over":heads===cap?"plan-cap-full":"plan-cap-ok";
-      return `<div class="plan-box">
-        <div class="plan-box-head"><span class="title">${esc(t.name)}</span><span class="meta ${cls}">${heads} / ${cap} 人</span>
-          ${t.main?"":`<button class="mini" onclick="planRenameTable('${t.id}')">備註</button><button class="mini" onclick="planDeleteTable('${t.id}')">×</button>`}</div>
-        <div class="plan-list">${ms.length?ms.map(g=>planRow(g,true)).join(""):`<div class="empty" style="padding:20px">尚無賓客</div>`}</div>
-      </div>`;
-    }).join("")}</div>`;
-
-    body+=`<div class="plan-assign"><div class="hint">已選 ${planSel.size} 組 → 指派桌次</div>
-      <div class="plan-chiprow">
-        <button class="plan-chip" onclick="planAssignTable(null)">移回未入座</button>
-        ${tbls.map(t=>`<button class="plan-chip primary" onclick="planAssignTable('${t.id}')">${esc(t.name)}</button>`).join("")}
-      </div></div>`;
-  }
-
-  return `<h2 class="section-title"><span class="eyebrow">Planning</span> 婚宴名單與排桌</h2>
-    <div class="plan-toolbar">
-      <button class="btn btn-ghost btn-sm" onclick="showPlanReport('detail')">🧾 詳細桌次</button>
-      <button class="btn btn-ghost btn-sm" onclick="showPlanReport('usher')">🪧 帶位總覽</button>
-      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('plannerImport').click()">📥 匯入舊排桌 JSON</button>
-      <input type="file" id="plannerImport" accept=".json" class="hidden" onchange="importPlannerJSON(event)">
-      ${planMode==="group"
-        ?`<button class="btn btn-ghost btn-sm" onclick="planAddGroup()">＋ 群組</button>${groups.length?"":`<button class="btn btn-ghost btn-sm" onclick="planDefaultGroups()">建立預設群組</button>`}`
-        :`<button class="btn btn-ghost btn-sm" onclick="planAddTable()">＋ 桌次</button><button class="btn btn-ghost btn-sm" onclick="planNormalizeTables()">整理桌號</button>`}
-    </div>
-    <div class="plan-subtabs">
-      <button class="${planMode==='group'?'on':''}" onclick="setPlanMode('group')">① 分群組</button>
-      <button class="${planMode==='table'?'on':''}" onclick="setPlanMode('table')">② 分桌次</button>
-    </div>
-    <div class="plan-search"><input class="inp" id="planSearch" placeholder="搜尋姓名…" value="${esc(planSearch)}" oninput="planSearch=this.value;render()"></div>
-    <div style="font-size:12px;color:var(--muted);margin:-3px 0 10px">共 ${guestList().length} 組 · ${planSum(guestList())} 人 · ${pending} 組待確認。主桌 12 人；其他桌 11 人；桌號跳過 4、14。</div>
-    ${body}`;
-}
-function bindSeating(){}
-
-/* 舊排桌 JSON → Firebase 報到資料 */
-function importPlannerJSON(ev){
-  const f=ev.target.files&&ev.target.files[0]; if(!f)return;
-  const r=new FileReader();
-  r.onload=()=>{
-    try{
-      const o=JSON.parse(r.result);
-      if(!Array.isArray(o.P)||!Array.isArray(o.G)||!Array.isArray(o.T))throw new Error("格式不符");
-      if(!confirm("這會用排桌 JSON 覆蓋目前的賓客與桌次，但會保留工作人員、場地設定及 Firebase 連線。確定匯入？"))return;
-
-      App.commit(s=>{
-        const oldMeta=s.meta||{};
-        const groups=o.G.map(x=>x.name).filter(Boolean);
-        const gmap=new Map(o.G.map(x=>[x.id,x.name]));
-        const tmap=new Map();
-        const newTables={};
-
-        [...o.T].sort((a,b)=>(+a.id||0)-(+b.id||0)).forEach((t,i)=>{
-          const nid=uid(); tmap.set(t.id,nid);
-          newTables[nid]={
-            name:t.name||"", capacity:t.main?12:11, order:i, note:"",
-            main:!!t.main||t.id===0||/主桌/.test(t.name||""), label:tableLabelFrom(t)
-          };
-        });
-
-        const newGuests={};
-        let skipped=0;
-        o.P.forEach(p=>{
-          const n=Math.max(0,Number(p.n)||0);
-          if(n<=0){skipped++;return;}
-          const gid=uid();
-          const group=gmap.get(p.g)||"";
-          newGuests[gid]={
-            name:p.name||"未命名", side:"共同", relation:group, group,
-            table:p.t==null?null:(tmap.get(p.t)||null),
-            needsCookie:p.note==="未發餅", partySize:n, companions:[],
-            arrived:false,giftAmount:0,cookieGiven:false,
-            confirmed:!p.est, child:!!p.child,
-            vegetarian:/素食/.test(String(p.note||"")),
-            plannerNote:p.note||""
-          };
-        });
-
-        s.guests=newGuests;
-        s.tables=newTables;
-        s.meta={...oldMeta,groups};
-        s.lottery={winners:[]};
-        normalizeTablesInState(s);
-        pushLog(s,"匯入排桌名單","ed","",`匯入 ${Object.keys(newGuests).length} 組，略過 ${skipped} 組 0 人`);
-      });
-      planSel.clear(); toast("已匯入排桌名單並同步 Firebase");
-    }catch(err){
-      console.error(err); toast("這不是排桌工具的 JSON");
-    }finally{ev.target.value="";}
-  };
-  r.readAsText(f);
-}
-
-/* 報表 */
-function splitPlannerNames(name){
-  return String(name||"").split(/[、，,／/]+/).map(x=>x.trim()).filter(Boolean);
-}
-function reportKnownNames(g){
-  const a=[...splitPlannerNames(g.name),...compNames(g)].filter(Boolean);
-  return [...new Set(a)];
-}
-function reportMarkedName(g,name){
-  if(!name)return "";
-  return (g.child?"☻ ":"")+(g.vegetarian?"🍀 ":"")+esc(name);
-}
-function planDetailHTML(){
-  const tbls=tableList(), gs=guestList();
-  const d=new Date(), ds=d.toLocaleDateString("zh-TW");
-  const blocks=tbls.map(t=>{
-    const ms=gs.filter(g=>g.table===t.id), n=planSum(ms);
-    return `<section class="detail-table">
-      <div class="detail-head"><span>${esc(t.name)}</span><span>${n} 人</span></div>
-      ${ms.length?`<table class="detail-list"><tbody>${ms.map(g=>`<tr><td>${esc(g.name)}</td><td>${planGuestHeads(g)} 人</td></tr>`).join("")}</tbody></table>`:`<div class="empty" style="padding:12px">尚無賓客</div>`}
-    </section>`;
-  }).join("");
-  return `<div class="plan-report-title"><h2>婚宴座位表</h2><p>${ds} · 共 ${tbls.length} 桌 / ${planSum(gs)} 人</p></div><div class="detail-grid">${blocks}</div>`;
-}
-function personSlotsForReport(g){
-  const count=planGuestHeads(g);
-  const names=reportKnownNames(g);
-  const slots=[];
-  for(let i=0;i<count;i++){
-    const nm=names[i]||"";
-    slots.push(`<div class="usher-slot2 ${nm?"":"empty"}">${nm?reportMarkedName(g,nm):"&nbsp;"}</div>`);
-  }
-  return slots;
-}
-function planUsherHTML(){
-  const tbls=tableList(),gs=guestList();
-  const d=new Date(),ds=d.toLocaleDateString("zh-TW");
-  const cards=tbls.map(t=>{
-    const ms=gs.filter(g=>g.table===t.id);
-    let slots=[]; ms.forEach(g=>slots.push(...personSlotsForReport(g)));
-    const target=t.main?12:planSum(ms);
-    while(slots.length<target)slots.push('<div class="usher-slot2 empty">&nbsp;</div>');
-    return `<section class="usher-card2"><div class="usher-head2">${esc(t.name)}</div><div class="usher-slots2">${slots.join("")}</div></section>`;
-  }).join("");
-  return `<div class="plan-report-title"><h2>婚宴帶位總覽</h2><p>${ds}</p></div>
-    <div class="usher-grid2">${cards}</div><div class="usher-legend">☻ 小孩　🍀 素食</div>`;
-}
-function showPlanReport(type){
-  closePlanReport();
-  const el=document.createElement("div");
-  el.id="planReport"; el.className="plan-report";
-  el.innerHTML=`<div class="plan-report-bar"><b>${type==="usher"?"帶位總覽":"詳細桌次"}</b>
-    <div class="actions"><button onclick="closePlanReport()">返回</button><button class="print" onclick="printPlanReport()">列印 / 存成 PDF</button></div></div>
-    <div class="plan-report-paper">${type==="usher"?planUsherHTML():planDetailHTML()}</div>`;
-  document.body.appendChild(el);
-}
-function closePlanReport(){const e=document.getElementById("planReport");if(e)e.remove();}
-function printPlanReport(){
-  document.body.classList.add("print-plan");
-  window.print();
-  setTimeout(()=>document.body.classList.remove("print-plan"),500);
-}
-
-/* 把舊拖曳介面的 assign 函式保留給相容性，但規劃頁不再使用拖曳 */
-
 /* ============================================================
    啟動
    ============================================================ */
@@ -2224,7 +1792,24 @@ async function bootApp(){
   await App.init();
   if(App.state.meta && App.state.meta.venue) document.getElementById("hdVenue").textContent=App.state.meta.venue;
   refreshOpUI();
-  // 正式整合版：空資料時不自動塞入示範名單。
+  // 首次使用塞入示範資料,方便立即試玩(僅本機模式且完全空白時)
+  if(App.mode==="local" && guestList().length===0 && tableList().length===0){
+    App.commit(s=>{
+      const t1=uid(),t2=uid(),t3=uid();
+      s.tables[t1]={name:"第 1 桌",capacity:10,order:1,note:"主桌"};
+      s.tables[t2]={name:"第 2 桌",capacity:10,order:2,note:""};
+      s.tables[t3]={name:"第 3 桌",capacity:10,order:3,note:""};
+      const demo=[
+        ["王大明","男方","大學同學",t1,true,2],["陳怡君","女方","公司同事",t1,false,1],
+        ["林志豪","男方","高中死黨",t2,true,1],["張美玲","女方","表姊",t2,true,2],
+        ["李俊宏","男方","同事",t3,false,1],["黃淑芬","女方","阿姨",null,true,1],
+      ];
+      demo.forEach(([name,side,relation,table,needsCookie,partySize])=>{
+        s.guests[uid()]={name,side,relation,table,needsCookie,partySize,arrived:false,giftAmount:0,cookieGiven:false};
+      });
+    });
+    toast("已載入示範名單,可自由修改 ✨");
+  }
   render();
   if(!App.operator){ setTimeout(showIdentify, 500); }
 }
