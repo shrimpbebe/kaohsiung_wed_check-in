@@ -1712,9 +1712,11 @@ function viewSettings(){
     <div style="font-size:13px;color:var(--muted);margin-bottom:12px">建議活動前先備份;本機模式換裝置時可用匯出/匯入搬移資料。</div>
     <div class="btn-row" style="margin-top:0">
       <button class="btn btn-ghost btn-sm" style="flex:1" onclick="requireAdmin('匯出備份', exportJSON)">🔒 匯出備份</button>
-      <button class="btn btn-ghost btn-sm" style="flex:1" onclick="requireAdmin('匯入備份', ()=>document.getElementById('importFile').click())">🔒 匯入備份</button>
+      <button class="btn btn-ghost btn-sm" style="flex:1" onclick="requireAdmin('匯入備份', ()=>document.getElementById('importFile').click())">🔒 匯入(覆蓋全部)</button>
     </div>
     <input type="file" id="importFile" accept=".json" class="hidden" onchange="importJSON(event)">
+    <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:10px;color:var(--green);border-color:#C9E4D5" onclick="requireAdmin('更新名單', ()=>document.getElementById('mergeFile').click())">🔄 更新名單(保留報到/禮金紀錄)</button>
+    <input type="file" id="mergeFile" accept=".json" class="hidden" onchange="importMergeFile(event)">
     <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:10px;color:var(--red)" onclick="clearAll()">🗑 清除所有資料</button>
   </div>
 
@@ -1756,6 +1758,45 @@ function importJSON(e){
     if(!confirm("匯入會覆蓋目前所有資料,確定?")) return;
     App.commit(s=>{ s.guests=data.guests||{}; s.tables=data.tables||{}; s.lottery=data.lottery||{winners:[]}; s.meta=data.meta||{}; });
     toast("已匯入備份"); render();
+  }catch(err){ toast("讀取失敗"); } };
+  r.readAsText(file); e.target.value="";
+}
+function importMergeFile(e){
+  const file=e.target.files[0]; if(!file)return;
+  const r=new FileReader();
+  r.onload=()=>{ try{
+    const data=JSON.parse(r.result);
+    if(!data.guests){ toast("檔案格式不符"); return; }
+    if(!confirm("用新名單更新姓名/桌次/喜餅,並保留現有的報到與禮金紀錄(以姓名比對)。確定?")) return;
+    let updated=0,added=0,kept=0;
+    App.commit(s=>{
+      const oldG=s.guests||{};
+      const liveByName={}; Object.values(oldG).forEach(g=>{ if(g&&g.name) liveByName[g.name]=g; });
+      const merged={}; const usedNames=new Set();
+      Object.entries(data.guests).forEach(([id,ng])=>{
+        const lv=liveByName[ng.name];
+        if(lv){ usedNames.add(ng.name); updated++;
+          merged[id]=Object.assign({},ng,{
+            arrived:!!lv.arrived, arrivedTime:lv.arrivedTime||null, checkinBy:lv.checkinBy||null,
+            giftAmount:Number(lv.giftAmount)||0, cookieGiven:!!lv.cookieGiven,
+            giftOnly:!!lv.giftOnly, prepaid:!!lv.prepaid, giftTime:lv.giftTime||null,
+            lastEditBy:lv.lastEditBy||null, lastEditTime:lv.lastEditTime||null,
+            companions:(Array.isArray(lv.companions)&&lv.companions.length)?lv.companions:(ng.companions||[])
+          });
+        } else { merged[id]=ng; added++; }
+      });
+      Object.values(oldG).forEach(g=>{
+        if(g&&g.name&&!usedNames.has(g.name)){
+          const rec=g.arrived||g.giftOnly||g.prepaid||(Number(g.giftAmount)>0);
+          if(rec){ merged["keep-"+uid()]=Object.assign({},g,{table:null}); kept++; }
+        }
+      });
+      s.guests=merged;
+      s.tables=data.tables||s.tables;
+      if(data.meta&&data.meta.venue) s.meta.venue=data.meta.venue;
+      pushLog(s,"更新名單(保留紀錄)","ed","",`更新 ${updated}·新增 ${added}·保留 ${kept}`);
+    });
+    toast(`已更新:更新 ${updated}、新增 ${added}、保留紀錄 ${kept}`); render();
   }catch(err){ toast("讀取失敗"); } };
   r.readAsText(file); e.target.value="";
 }
